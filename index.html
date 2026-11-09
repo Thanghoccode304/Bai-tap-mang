@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Mảng - CyberSoft</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Flowbite CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-slate-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-slate-800">
+    <div class="max-w-5xl mx-auto bg-white p-6 sm:p-10 md:p-12 rounded-3xl shadow-xl border border-slate-200">
+      
+      <!-- Tiêu đề trang -->
+      <div class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight uppercase">
+          Bài Tập Xử Lý Mảng
+        </h1>
+        <p class="text-base text-slate-500 mt-2 max-w-xl mx-auto">
+          Thực hành các thuật toán xử lý mảng (Array) với hàm function, vòng lặp for và câu điều kiện if-else
+        </p>
+      </div>
+
+      <!-- Khu vực nhập mảng số nguyên rộng rãi, nổi bật -->
+      <div class="mb-10 p-6 sm:p-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl shadow-sm">
+        <label for="number-input" class="block mb-3 text-base font-bold text-slate-700">
+          Nhập số nguyên để thêm vào mảng:
+        </label>
+        <div class="flex flex-col sm:flex-row gap-4 items-stretch">
+          <input
+            type="number"
+            id="number-input"
+            class="flex-1 px-5 py-3.5 bg-white border border-slate-300 text-slate-900 text-base rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-xs placeholder:text-slate-400"
+            placeholder="Nhập một số nguyên bất kỳ..."
+            required
+          />
+          <button
+            type="button"
+            id="btnAddNumber"
+            class="px-7 py-3.5 text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 active:scale-95 transition shadow-sm cursor-pointer whitespace-nowrap"
+          >
+            + Thêm số
+          </button>
+          <button
+            type="button"
+            id="btnClearArray"
+            class="px-5 py-3.5 text-base font-medium text-slate-600 bg-slate-200 rounded-xl hover:bg-slate-300 active:scale-95 transition cursor-pointer whitespace-nowrap"
+          >
+            Làm mới
+          </button>
+        </div>
+
+        <!-- Khung hiển thị mảng hiện tại -->
+        <div
+          id="txtArray"
+          class="mt-5 p-4 bg-white border-2 border-dashed border-blue-300 rounded-xl text-blue-900 font-semibold text-base sm:text-lg shadow-xs flex items-center min-h-[56px]"
+        >
+          👉 Dãy số hiện tại: [ ]
+        </div>
+      </div>
+
+      <!-- Accordion danh sách 10 bài tập với khoảng cách thoáng -->
+      <div id="accordion-collapse" data-accordion="collapse" class="space-y-4">
+        
+        <!-- 1. Tổng số dương -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-1">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-1"
+              aria-expanded="false"
+              aria-controls="body-1"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">1</span>
+                Tổng các số dương
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-1" class="hidden" aria-labelledby="heading-1">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Tính tổng của tất cả các phần tử có giá trị lớn hơn 0 trong dãy số đã nhập.</p>
+              <button
+                type="button"
+                id="btnTongSoDuong"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Tính tổng
+              </button>
+              <div
+                id="txtKetQua1"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Đếm số dương -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-2">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-2"
+              aria-expanded="false"
+              aria-controls="body-2"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">2</span>
+                Đếm số lượng số dương
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-2" class="hidden" aria-labelledby="heading-2">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Đếm xem trong dãy số hiện tại có bao nhiêu số dương (giá trị > 0).</p>
+              <button
+                type="button"
+                id="btnDemSoDuong"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Đếm số
+              </button>
+              <div
+                id="txtKetQua2"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Tìm số nhỏ nhất -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-3">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-3"
+              aria-expanded="false"
+              aria-controls="body-3"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">3</span>
+                Tìm số nhỏ nhất
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-3" class="hidden" aria-labelledby="heading-3">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Tìm phần tử mang giá trị nhỏ nhất trong toàn bộ dãy số.</p>
+              <button
+                type="button"
+                id="btnSoNhoNhat"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Tìm số nhỏ nhất
+              </button>
+              <div
+                id="txtKetQua3"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Tìm số dương nhỏ nhất -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-4">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-4"
+              aria-expanded="false"
+              aria-controls="body-4"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">4</span>
+                Tìm số dương nhỏ nhất
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-4" class="hidden" aria-labelledby="heading-4">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Lọc các phần tử là số dương và tìm giá trị dương nhỏ nhất trong số đó.</p>
+              <button
+                type="button"
+                id="btnSoDuongNhoNhat"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Tìm số dương nhỏ nhất
+              </button>
+              <div
+                id="txtKetQua4"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Tìm số chẵn cuối cùng -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-5">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-5"
+              aria-expanded="false"
+              aria-controls="body-5"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">5</span>
+                Tìm số chẵn cuối cùng
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-5" class="hidden" aria-labelledby="heading-5">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Tìm số chẵn xuất hiện ở vị trí cuối cùng trong mảng (nếu không có số chẵn nào thì kết quả là -1).</p>
+              <button
+                type="button"
+                id="btnSoChanCuoiCung"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Tìm số chẵn
+              </button>
+              <div
+                id="txtKetQua5"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Đổi chỗ 2 giá trị -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-6">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-6"
+              aria-expanded="false"
+              aria-controls="body-6"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">6</span>
+                Đổi chỗ 2 giá trị theo vị trí (index)
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-6" class="hidden" aria-labelledby="heading-6">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Nhập vào 2 vị trí (chỉ số index bắt đầu từ 0) để thực hiện đổi chỗ 2 giá trị.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+                <div>
+                  <label class="block mb-1 text-sm font-medium text-slate-700">Vị trí thứ 1:</label>
+                  <input
+                    type="number"
+                    id="inputViTri1"
+                    class="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 text-base rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Ví dụ: 0"
+                  />
+                </div>
+                <div>
+                  <label class="block mb-1 text-sm font-medium text-slate-700">Vị trí thứ 2:</label>
+                  <input
+                    type="number"
+                    id="inputViTri2"
+                    class="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 text-base rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Ví dụ: 2"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                id="btnDoiCho"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Đổi chỗ
+              </button>
+              <div
+                id="txtKetQua6"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Sắp xếp tăng dần -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-7">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-7"
+              aria-expanded="false"
+              aria-controls="body-7"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">7</span>
+                Sắp xếp tăng dần
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-7" class="hidden" aria-labelledby="heading-7">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Sắp xếp các phần tử trong dãy số theo thứ tự từ bé đến lớn bằng thuật toán hoán vị.</p>
+              <button
+                type="button"
+                id="btnSapXep"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Sắp xếp
+              </button>
+              <div
+                id="txtKetQua7"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Tìm số nguyên tố đầu tiên -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-8">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-8"
+              aria-expanded="false"
+              aria-controls="body-8"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">8</span>
+                Tìm số nguyên tố đầu tiên
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-8" class="hidden" aria-labelledby="heading-8">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Tìm số nguyên tố đầu tiên có trong mảng (nếu không tìm thấy số nguyên tố thì trả về -1).</p>
+              <button
+                type="button"
+                id="btnSoNguyenToDauTien"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Tìm số nguyên tố
+              </button>
+              <div
+                id="txtKetQua8"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Đếm số nguyên -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-9">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-9"
+              aria-expanded="false"
+              aria-controls="body-9"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">9</span>
+                Đếm số nguyên (trong mảng số thực)
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-9" class="hidden" aria-labelledby="heading-9">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Nhập danh sách các số thực bất kỳ và đếm xem có bao nhiêu phần tử là số nguyên.</p>
+              <div class="flex flex-col sm:flex-row gap-3 max-w-xl">
+                <input
+                  type="number"
+                  step="any"
+                  id="inputSoThuc"
+                  class="flex-1 px-4 py-3 bg-white border border-slate-300 text-slate-900 text-base rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Nhập số thực (ví dụ: 1.5, 3, -4.2...)"
+                />
+                <button
+                  type="button"
+                  id="btnThemSoThuc"
+                  class="px-6 py-3 text-sm sm:text-base font-semibold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition cursor-pointer whitespace-nowrap shadow-xs"
+                >
+                  + Thêm số thực
+                </button>
+              </div>
+              <div
+                id="txtArraySoThuc"
+                class="p-3.5 bg-slate-50 border border-dashed border-slate-300 rounded-xl text-base text-slate-700 font-medium"
+              >
+                👉 Mảng số thực: [ ]
+              </div>
+              <button
+                type="button"
+                id="btnDemSoNguyen"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                Đếm số nguyên
+              </button>
+              <div
+                id="txtKetQua9"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. So sánh số lượng số âm và số dương -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition">
+          <h2 id="heading-10">
+            <button
+              type="button"
+              class="flex items-center justify-between w-full py-4.5 px-6 font-semibold text-left text-base sm:text-lg text-slate-800 bg-slate-50 hover:bg-slate-100 transition cursor-pointer"
+              data-accordion-target="#body-10"
+              aria-expanded="false"
+              aria-controls="body-10"
+            >
+              <span class="flex items-center gap-2">
+                <span class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">10</span>
+                So sánh số lượng số âm và số dương
+              </span>
+              <svg data-accordion-icon class="w-4 h-4 shrink-0 transition-transform" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+          </h2>
+          <div id="body-10" class="hidden" aria-labelledby="heading-10">
+            <div class="p-6 bg-white border-t border-slate-200 space-y-4">
+              <p class="text-sm sm:text-base text-slate-600">Đếm và so sánh xem giữa số lượng số dương và số lượng số âm trong dãy số, số nào nhiều hơn.</p>
+              <button
+                type="button"
+                id="btnSoSanh"
+                class="px-6 py-2.5 text-sm sm:text-base font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer shadow-xs"
+              >
+                So sánh
+              </button>
+              <div
+                id="txtKetQua10"
+                class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-base font-semibold shadow-xs"
+              >
+                👉 Kết quả: Chưa tính
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Script Flowbite & main.js -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
